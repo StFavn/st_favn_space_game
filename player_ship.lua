@@ -7,15 +7,15 @@ local mod_screen = require("screen")
 -- SHIP VARIABLES --
 local ship = {}
 
-local ship_image = lib_love.graphics.newImage("/assets/images/ship_imagine_4_42x63.png")
-local ship_trust_spriteSheet = lib_love.graphics.newImage("/assets/images/ship_trust_split_4_42x63.png")
-local ship_trust_grid = lib_anim8.newGrid(63, 42, ship_trust_spriteSheet:getWidth(), ship_trust_spriteSheet:getHeight())
-local ship_trust_animation = lib_anim8.newAnimation(ship_trust_grid('1-6', 1), 0.05)
-
 -- LOADS --
 local function load_player_ship()
-  ship.width = ship_image:getWidth()
-  ship.height = ship_image:getHeight()
+  ship.image = lib_love.graphics.newImage("/assets/images/ship_imagine_4_42x63.png")
+  ship.trust_spriteSheet = lib_love.graphics.newImage("/assets/images/ship_trust_split_4_42x63.png")
+  ship.trust_grid = lib_anim8.newGrid(63, 42, ship.trust_spriteSheet:getWidth(), ship.trust_spriteSheet:getHeight())
+  ship.trust_animation = lib_anim8.newAnimation(ship.trust_grid('1-6', 1), 0.05)
+
+  ship.width = ship.image:getWidth()
+  ship.height = ship.image:getHeight()
 
   ship.x = mod_screen.screen_width / 2
   ship.y = mod_screen.screen_height / 2
@@ -39,7 +39,7 @@ local function update_player_ship(dt)
 end
 
 local function update_player_ship_animation(dt)
-  ship_trust_animation:update(dt)
+  ship.trust_animation:update(dt)
 end
 
 -- MANUAL OPERATIONS --
@@ -65,9 +65,9 @@ local function draw_player_ship()
   lib_love.graphics.translate(-ship.width / 2, -ship.height / 2)
 
   if ship.trust then
-    ship_trust_animation:draw(ship_trust_spriteSheet, 0, 0)
+    ship.trust_animation:draw(ship.trust_spriteSheet, 0, 0)
   else
-    lib_love.graphics.draw(ship_image, 0, 0)
+    lib_love.graphics.draw(ship.image, 0, 0)
   end
 
   lib_love.graphics.pop()

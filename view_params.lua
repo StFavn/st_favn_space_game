@@ -27,6 +27,7 @@ local function view_params(params)
   if view_coordinates then
     param_coordinates(params.ship_x, params.ship_y)
   end
+
   if view_speed then
     param_speed(params.ship_speed)
   end

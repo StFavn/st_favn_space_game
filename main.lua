@@ -15,9 +15,9 @@ local background = lib_love.graphics.newImage("/assets/images/background.png")
 local cam_ship = mod_camera()
 local cam_ship_flag = true
 local params = {
-  ship_x = 0,
-  ship_y = 0,
-  ship_speed = 0
+  ship_x = nil,
+  ship_y = nil,
+  ship_speed = nil
 }
 
 -- LOADS --
