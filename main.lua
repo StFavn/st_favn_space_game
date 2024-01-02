@@ -9,9 +9,9 @@ local mod_player_ship = require("player_ship")
 local mod_screen = require("screen")
 local mod_view_params = require("view_params")
 local mod_handle_input = require("handle_input")
+local mod_background = require("background")
 
 -- VARIABLES --
-local background = lib_love.graphics.newImage("/assets/images/background_4096x4096.png")
 local cam_ship = mod_camera()
 local cam_ship_flag = true
 local params = {
@@ -29,8 +29,8 @@ end
 -- UPDATES --
 local function update_player_ship_view_params()
   params = {
-    ship_x = mod_player_ship.ship.x,
-    ship_y = mod_player_ship.ship.y,
+    ship_x = mod_player_ship.ship.x - mod_background.map_x_center,
+    ship_y = mod_player_ship.ship.y - mod_background.map_y_center,
     ship_speed = mod_player_ship.ship.speed
   }
 end
@@ -52,7 +52,7 @@ end
 function lib_love.draw()
   if  cam_ship_flag then
     cam_ship:attach()
-      lib_love.graphics.draw(background)
+      mod_background.draw_bacground()
       mod_player_ship.draw_player_ship()
     cam_ship:detach()
     mod_view_params.view_params(params)
