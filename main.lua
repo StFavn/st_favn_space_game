@@ -1,6 +1,6 @@
 -- main.lua
 
--- UTILS --
+-- LIBS --
 local lib_love = require("love")
 local mod_camera = require("libs/camera")
 
@@ -11,7 +11,7 @@ local mod_view_params = require("view_params")
 local mod_handle_input = require("handle_input")
 
 -- VARIABLES --
-local background = lib_love.graphics.newImage("/assets/images/background.png")
+local background = lib_love.graphics.newImage("/assets/images/background_4096x4096.png")
 local cam_ship = mod_camera()
 local cam_ship_flag = true
 local params = {
