@@ -12,6 +12,7 @@ local mod_view_params = require("view_params")
 local mod_handle_input = require("handle_input")
 local mod_background = require("background")
 local mod_state = require("state")
+local mod_pause = require("pause")
 
 -- VARIABLES --
 local cam = mod_camera()
@@ -21,11 +22,13 @@ local params = {
   ship_speed = nil
 }
 
+
 -- LOADS --
 function lib_love.load()
   mod_player_ship.load_player_ship()
   mod_player.load_player()
   mod_screen.load_screen()
+  mod_pause.load_pause()
 end
 
 -- UPDATES --
@@ -39,6 +42,11 @@ local function update_player_ship_view_params()
 end
 
 function lib_love.update(dt)
+  if mod_state.state == "paused" then
+    mod_pause.update_pause()
+    return
+  end
+
   update_player_ship_view_params()
   mod_handle_input.handle_input(dt)
   mod_player_ship.update_player_ship(dt)
@@ -57,31 +65,52 @@ end
 
 -- KEY PRESSED --
 function lib_love.keypressed(key)
-  if key == "e" then
+  if key == "escape" then
+    if mod_state.state == "ship" or mod_state.state == "player" then
+      mod_state.save_state = mod_state.state
+      mod_state.state = "paused"
+    elseif mod_state.state == "paused" then
+      mod_pause.state_menu = "paused_menu"  --  Не работает! 
+      mod_state.state = mod_state.save_state
+    end
+
+  elseif key == "e" then
     if mod_state.state == "ship" then
-      -- cam:rotate(mod_player_ship.ship.angle)
       mod_state.state = "player"
-      cam:zoom(4.0)
+      cam:zoom(mod_state.player_zoom)
       cam:rotate(-mod_player_ship.ship.angle)
     elseif mod_state.state == "player" then
       mod_state.state = "ship"
-      cam:zoom(0.25)
+      cam:zoom(mod_state.ship_zoom)
       cam:rotate(mod_player_ship.ship.angle)
+    end
+  end
+end
+
+function lib_love.mousepressed(x, y, button)
+  if button == 1 then
+    if mod_state.state == "paused" then
+      mod_pause.mousepressed_left_pause()
     end
   end
 end
 
 -- DRAW --
 function lib_love.draw()
-    cam:attach()
-      mod_background.draw_bacground()
-      if mod_state.state == "ship" then
-        mod_player_ship.draw_player_ship_state_ship()
-      end
-      if mod_state.state == "player" then
-        mod_player_ship.draw_player_ship_state_player()
-        mod_player.draw_player()
-      end
-    cam:detach()
-    mod_view_params.view_params(params)
+  cam:attach()
+    mod_background.draw_bacground()
+    if mod_state.state == "ship" or mod_state.save_state == "ship" then
+      mod_player_ship.draw_player_ship_state_ship()
+    end
+    if mod_state.state == "player" or mod_state.save_state == "player" then
+      mod_player_ship.draw_player_ship_state_player()
+      mod_player.draw_player()
+    end
+  cam:detach()
+  mod_view_params.view_params(params)
+
+  if mod_state.state == "paused" then
+    mod_pause.draw_pause()
+  end
+  --lib_love.graphics.print("FPS: " .. lib_love.timer.getFPS(), 10, 10)
 end
