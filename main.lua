@@ -31,6 +31,7 @@ end
 -- UPDATES --
 local function update_player_ship_view_params()
   params = {
+    -- Смещаю центр координат на центр отображаемой карты и превожу координаты корабля в соответствие с этим
     ship_x = mod_player_ship.ship.x - mod_background.map_x_center,
     ship_y = mod_player_ship.ship.y - mod_background.map_y_center,
     ship_speed = mod_player_ship.ship.speed
@@ -72,17 +73,15 @@ end
 
 -- DRAW --
 function lib_love.draw()
-  if  mod_state.state == "ship" then
     cam:attach()
       mod_background.draw_bacground()
-      mod_player_ship.draw_player_ship_state_ship()
+      if mod_state.state == "ship" then
+        mod_player_ship.draw_player_ship_state_ship()
+      end
+      if mod_state.state == "player" then
+        mod_player_ship.draw_player_ship_state_player()
+        mod_player.draw_player()
+      end
     cam:detach()
     mod_view_params.view_params(params)
-  elseif mod_state.state == "player" then
-    cam:attach()
-      mod_background.draw_bacground()
-      mod_player_ship.draw_player_ship_state_player()
-      mod_player.draw_player()
-    cam:detach()
-  end
 end

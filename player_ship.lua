@@ -22,17 +22,18 @@ local function load_player_ship()
   ship.x = mod_background.map_x_center
   ship.y = mod_background.map_y_center
 
-  ship.vx = 0
-  ship.vy = 0
+  ship.speed_x = 0             -- Начальная скорость по оси X
+  ship.speed_y = 0             -- Начальная скорость по оси Y
 
-  ship.angle = -1/2 * math.pi
-  ship.trust = false
+  ship.angle = -1/2 * math.pi  -- Начальное положение угла
+  ship.trust = false           -- Состояние двигателя
 
-  ship.speed = 0
-  ship.accel = 100
-  ship.turn_speed = math.pi
+  ship.speed = 0               -- Объявляю переменную для скорости
+  ship.accel = 100             -- Мощность ускорителей
+  ship.turn_speed = math.pi    -- Скорость изменения поворота
 
-  -- в разработке. временное решение. Здесь игрок должен появляться, когда происходит смена режима. И здесь игрок должен находиться, чтобы сменить режим.
+  -- в разработке. временное решение. Здесь игрок должен появляться, когда происходит смена режима. 
+  -- И здесь игрок должен находиться, чтобы сменить режим.
   ship.manual_zone = {
     center_x = ship.x + ship.width / 2,
     center_y = ship.y + ship.height / 2,
@@ -42,9 +43,9 @@ end
 
 -- UPDATES --
 local function update_player_ship(dt)
-  ship.x = ship.x + ship.vx * dt
-  ship.y = ship.y + ship.vy * dt
-  ship.speed = math.sqrt(ship.vx^2 + ship.vy^2)
+  ship.x = ship.x + ship.speed_x * dt
+  ship.y = ship.y + ship.speed_y * dt
+  ship.speed = math.sqrt(ship.speed_x^2 + ship.speed_y^2)
 end
 
 local function update_player_ship_animation(dt)
@@ -52,17 +53,17 @@ local function update_player_ship_animation(dt)
 end
 
 -- MANUAL OPERATIONS --
-local function manual_aseleration(dt)
+local function manual_aseleration(dt)      -- Нажатие клавиши W
   ship.trust = true
-  ship.vx = ship.vx + math.cos(ship.angle) * ship.accel * dt
-  ship.vy = ship.vy + math.sin(ship.angle) * ship.accel * dt
+  ship.speed_x = ship.speed_x + math.cos(ship.angle) * ship.accel * dt
+  ship.speed_y = ship.speed_y + math.sin(ship.angle) * ship.accel * dt
 end
 
-local function manual_turn_left(dt)
+local function manual_turn_left(dt)        -- Нажатие клавиши A
   ship.angle = ship.angle - ship.turn_speed * dt
 end
 
-local function manual_turn_right(dt)
+local function manual_turn_right(dt)       -- Нажатие клавиши D
   ship.angle = ship.angle + ship.turn_speed * dt
 end
 
