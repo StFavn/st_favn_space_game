@@ -22,7 +22,6 @@ local params = {
   ship_speed = nil
 }
 
-
 -- LOADS --
 function lib_love.load()
   mod_player_ship.load_player_ship()

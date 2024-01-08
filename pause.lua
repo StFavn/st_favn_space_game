@@ -10,7 +10,6 @@ local menu = {}
 local settings = {}
 local color = {}
 local font = {}
-
 local state_menu = "paused_menu"
 
 -- CALLBACKS paused_menu --
