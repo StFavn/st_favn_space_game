@@ -15,7 +15,7 @@ local state_menu = "paused_menu"
 
 -- CALLBACKS paused_menu --
 local function callback_continue()
-  mod_state.state = mod_state.save_state
+  mod_state.state_pause = false
 end
 
 local function callback_settings()
@@ -96,6 +96,17 @@ local function callback_settings_back()
   state_menu = "paused_menu"
 end
 
+-- CALLBACKS outside function --
+local function callback_menu_deactivate()
+  mod_state.state_pause = false
+end
+
+local function callback_menu_activate()
+  state_menu = "paused_menu"
+  mod_state.state_pause = true
+end
+
+
 -- LOADS --
 local function load_pause()
   color.background = {
@@ -112,12 +123,12 @@ local function load_pause()
 
 
   menu.title =    {text = "Пауза",      x = 100, y = 50,  w = 200, h = 50}
-  menu.continue = {text = "Продолжить", x = 100, y = 150, w = 200, h = 50, m_state = 0, callback = callback_continue}
-  menu.settings = {text = "Настроики",  x = 100, y = 200, w = 200, h = 50, m_state = 0, callback = callback_settings}
-  menu.exit =     {text = "Выход",      x = 100, y = 250, w = 200, h = 50, m_state = 0, callback = callback_exit}
+  menu.continue = {text = "Продолжить", x = 100, y = 150, w = 200, h = 25, m_state = 0, callback = callback_continue}
+  menu.settings = {text = "Настройки",  x = 100, y = 200, w = 200, h = 25, m_state = 0, callback = callback_settings}
+  menu.exit =     {text = "Выход",      x = 100, y = 250, w = 200, h = 25, m_state = 0, callback = callback_exit}
 
-  settings.title =              {text = "Настроики",           x = 100, y = 50,  w = 200, h = 50}
-  settings.window_state =       {text = "Оконныи режим",       x = 100, y = 150, w = 200, h = 50}
+  settings.title =              {text = "Настройки",           x = 100, y = 50,  w = 200, h = 50}
+  settings.window_state =       {text = "Оконный режим",       x = 100, y = 150, w = 200, h = 50}
   settings.resol_800x600 =      {text = "800x600",             x = 400, y = 150, w = 200, h = 25, state = 1, m_state = 0, callback = callback_resol_800x600}
   settings.resol_1024x768 =     {text = "1024x768",            x = 400, y = 175, w = 200, h = 25, state = 0, m_state = 0, callback = callback_resol_1024x768}
   settings.resol_1280x720 =     {text = "1280x720",            x = 400, y = 200, w = 200, h = 25, state = 0, m_state = 0, callback = callback_resol_1280x720}
@@ -129,6 +140,7 @@ end
 
 
 -- UPDATES --
+-- Проверка наведения мыши на пункт меню
 local function check_m_state(point)
   local mouse_x, mouse_y = lib_love.mouse.getPosition()
   if mouse_x >= point.x and mouse_x <= point.x + point.w
@@ -139,6 +151,7 @@ local function check_m_state(point)
   end
 end
 
+-- Проверка нажатия на пункт меню
 local function check_click(point)
   if point.m_state == 1 then
     point.callback()
@@ -223,14 +236,15 @@ local function draw_pause()
     draw_selected_with_m_state(settings.full_screen_off)
     draw_point_with_m_state(settings.back)
   end
-  lib_love.graphics.print("state_menu: " .. state_menu, 10, 30)
 end
 
 return {
+  -- FUNCTIONS --
   load_pause = load_pause;
   update_pause = update_pause;
   draw_pause = draw_pause;
   mousepressed_left_pause = mousepressed_left_pause;
 
-  state_menu = state_menu;
+  callback_menu_activate = callback_menu_activate;
+  callback_menu_deactivate = callback_menu_deactivate;
 }

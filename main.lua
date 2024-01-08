@@ -42,7 +42,7 @@ local function update_player_ship_view_params()
 end
 
 function lib_love.update(dt)
-  if mod_state.state == "paused" then
+  if mod_state.state_pause then
     mod_pause.update_pause()
     return
   end
@@ -66,12 +66,10 @@ end
 -- KEY PRESSED --
 function lib_love.keypressed(key)
   if key == "escape" then
-    if mod_state.state == "ship" or mod_state.state == "player" then
-      mod_state.save_state = mod_state.state
-      mod_state.state = "paused"
-    elseif mod_state.state == "paused" then
-      mod_pause.state_menu = "paused_menu"  --  Не работает! 
-      mod_state.state = mod_state.save_state
+    if mod_state.state_pause then
+      mod_pause.callback_menu_deactivate()
+    elseif mod_state.state == "ship" or mod_state.state == "player" then
+      mod_pause.callback_menu_activate()
     end
 
   elseif key == "e" then
@@ -89,7 +87,7 @@ end
 
 function lib_love.mousepressed(x, y, button)
   if button == 1 then
-    if mod_state.state == "paused" then
+    if mod_state.state_pause then
       mod_pause.mousepressed_left_pause()
     end
   end
@@ -99,17 +97,17 @@ end
 function lib_love.draw()
   cam:attach()
     mod_background.draw_bacground()
-    if mod_state.state == "ship" or mod_state.save_state == "ship" then
+    if mod_state.state == "ship" then
       mod_player_ship.draw_player_ship_state_ship()
     end
-    if mod_state.state == "player" or mod_state.save_state == "player" then
+    if mod_state.state == "player" then
       mod_player_ship.draw_player_ship_state_player()
       mod_player.draw_player()
     end
   cam:detach()
   mod_view_params.view_params(params)
 
-  if mod_state.state == "paused" then
+  if mod_state.state_pause then
     mod_pause.draw_pause()
   end
   --lib_love.graphics.print("FPS: " .. lib_love.timer.getFPS(), 10, 10)
