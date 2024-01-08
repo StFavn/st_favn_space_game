@@ -12,7 +12,7 @@ local mod_view_params = require("view_params")
 local mod_handle_input = require("handle_input")
 local mod_background = require("background")
 local mod_state = require("state")
-local mod_pause = require("pause")
+local mod_main_menu = require("/menu/main_menu")
 
 -- VARIABLES --
 local cam = mod_camera()
@@ -27,7 +27,7 @@ function lib_love.load()
   mod_player_ship.load_player_ship()
   mod_player.load_player()
   mod_screen.load_screen()
-  mod_pause.load_pause()
+  mod_main_menu.load_main_menu()
 end
 
 -- UPDATES --
@@ -42,7 +42,7 @@ end
 
 function lib_love.update(dt)
   if mod_state.state_pause then
-    mod_pause.update_pause()
+    mod_main_menu.update_main_menu()
     return
   end
 
@@ -66,9 +66,9 @@ end
 function lib_love.keypressed(key)
   if key == "escape" then
     if mod_state.state_pause then
-      mod_pause.callback_menu_deactivate()
+      mod_main_menu.callback_menu_deactivate()
     elseif mod_state.state == "ship" or mod_state.state == "player" then
-      mod_pause.callback_menu_activate()
+      mod_main_menu.callback_menu_activate()
     end
 
   elseif key == "e" then
@@ -87,7 +87,7 @@ end
 function lib_love.mousepressed(x, y, button)
   if button == 1 then
     if mod_state.state_pause then
-      mod_pause.mousepressed_left_pause()
+      mod_main_menu.mousepressed_left_pause()
     end
   end
 end
@@ -107,7 +107,7 @@ function lib_love.draw()
   mod_view_params.view_params(params)
 
   if mod_state.state_pause then
-    mod_pause.draw_pause()
+    mod_main_menu.draw_main_menu()
   end
   --lib_love.graphics.print("FPS: " .. lib_love.timer.getFPS(), 10, 10)
 end
