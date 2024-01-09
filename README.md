@@ -26,3 +26,9 @@ https://docs.google.com/document/d/19chHnejsjxtYBJIdatgDiynKBj9xyGE8BB38LWuLxL4/
 
 ### Ссылка на notion доску
 https://www.notion.so/St_favn-space-game-dfeb057347624fdd8cd6cd7cb481a70a?pvs=4
+
+### Текущая архитектура проекта
+![photo_2024-01-10 03 07 17](https://github.com/StFavn/st_favn_space_game/assets/82037298/1484226c-fddc-499a-8ac1-731ae0eef410)
+
+
+
