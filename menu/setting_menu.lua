@@ -2,12 +2,10 @@
 
 -- LIBS --
 local lib_love = require("love")
-local mod_screen = require("screen")
+local mod_utils_main = require("utils_main")
 
 -- MODS_MENU
 local mod_utils = require("/menu/utils_menu")
-
-
 
 -- VARIABLES --
 local settings_menu = {}
@@ -15,13 +13,13 @@ local settings_menu = {}
 
 -- CALLBACKS paused_settings --
 local function callback_resol_800x600()
-  mod_screen.screen_width = 800
-  mod_screen.screen_height = 600
+  mod_utils_main.screen_width = 800
+  mod_utils_main.screen_height = 600
 
-  lib_love.window.setMode(mod_screen.screen_width, mod_screen.screen_height)
+  lib_love.window.setMode(mod_utils_main.screen_width, mod_utils_main.screen_height)
 
-  mod_utils.color.background.width_factor = mod_screen.screen_width / 800
-  mod_utils.color.background.height_factor = mod_screen.screen_height / 600
+  mod_utils.background_menu.width_factor = mod_utils_main.screen_width / 800
+  mod_utils.background_menu.height_factor = mod_utils_main.screen_height / 600
 
   settings_menu.resol_800x600.state = 1
   settings_menu.resol_1024x768.state = 0
@@ -31,13 +29,13 @@ local function callback_resol_800x600()
 end
 
 local function callback_resol_1024x768()
-  mod_screen.screen_width = 1024
-  mod_screen.screen_height = 768
+  mod_utils_main.screen_width = 1024
+  mod_utils_main.screen_height = 768
 
-  lib_love.window.setMode(mod_screen.screen_width, mod_screen.screen_height)
+  lib_love.window.setMode(mod_utils_main.screen_width, mod_utils_main.screen_height)
 
-  mod_utils.color.background.width_factor = mod_screen.screen_width / 800
-  mod_utils.color.background.height_factor = mod_screen.screen_height / 600
+  mod_utils.background_menu.width_factor = mod_utils_main.screen_width / 800
+  mod_utils.background_menu.height_factor = mod_utils_main.screen_height / 600
 
   settings_menu.resol_800x600.state = 0
   settings_menu.resol_1024x768.state = 1
@@ -47,13 +45,13 @@ local function callback_resol_1024x768()
 end
 
 local function callback_resol_1280x720()
-  mod_screen.screen_width = 1280
-  mod_screen.screen_height = 720
+  mod_utils_main.screen_width = 1280
+  mod_utils_main.screen_height = 720
 
-  lib_love.window.setMode(mod_screen.screen_width, mod_screen.screen_height)
+  lib_love.window.setMode(mod_utils_main.screen_width, mod_utils_main.screen_height)
 
-  mod_utils.color.background.width_factor = mod_screen.screen_width / 800
-  mod_utils.color.background.height_factor = mod_screen.screen_height / 600
+  mod_utils.background_menu.width_factor = mod_utils_main.screen_width / 800
+  mod_utils.background_menu.height_factor = mod_utils_main.screen_height / 600
 
   settings_menu.resol_800x600.state = 0
   settings_menu.resol_1024x768.state = 0
@@ -66,15 +64,15 @@ local function callback_full_screen_on()
   local width, height = lib_love.window.getDesktopDimensions(1)
   lib_love.window.setMode(width, height, {fullscreen = true})
 
-  mod_utils.color.background.width_factor = width / 800
-  mod_utils.color.background.height_factor = height / 600
+  mod_utils.background_menu.width_factor = width / 800
+  mod_utils.background_menu.height_factor = height / 600
 
   settings_menu.full_screen_on.state = 1
   settings_menu.full_screen_off.state = 0
 end
 
 local function callback_full_screen_off()
-  lib_love.window.setMode(mod_screen.screen_width, mod_screen.screen_height)
+  lib_love.window.setMode(mod_utils_main.screen_width, mod_utils_main.screen_height)
   settings_menu.full_screen_on.state = 0
   settings_menu.full_screen_off.state = 1
 end

@@ -24,23 +24,10 @@ local function load_player()
   player.speed = 10
 end
 
--- UPDATES --
-local function update_player(dt)
-  player.angle = mod_player_ship.ship.angle
-
-  player.ship_speed_x = mod_player_ship.ship.speed_x
-  player.ship_speed_y = mod_player_ship.ship.speed_y
-
-  player.x = player.x + player.ship_speed_x * dt
-  player.y = player.y + player.ship_speed_y * dt
-end
-
 -- MANUAL OPERATIONS --
--- Так как камера принимает статический угол относительно корабля при переключении режима
--- То изменения координат игрока должны соответствовать нажимаемым клавишам относительно камеры
 local function move_up(dt)
-  local dx = -math.sin(-mod_player_ship.ship.angle) * player.speed * dt
-  local dy = -math.cos(-mod_player_ship.ship.angle) * player.speed * dt
+  local dx = -math.sin(-player.angle) * player.speed * dt
+  local dy = -math.cos(-player.angle) * player.speed * dt
   player.x = player.x + dx
   player.y = player.y + dy
 end
@@ -66,6 +53,39 @@ local function move_right(dt)
   player.y = player.y + dy
 end
 
+local function handle_input_player(dt)
+  if lib_love.keyboard.isDown("w") then
+    move_up(dt)
+  end
+
+  if lib_love.keyboard.isDown("s") then
+    move_down(dt)
+  end
+
+  if lib_love.keyboard.isDown("a") then
+    move_left(dt)
+  end
+
+  if lib_love.keyboard.isDown("d") then
+    move_right(dt)
+  end
+end
+
+-- UPDATES --
+local function update_params_player(dt)
+  player.angle = mod_player_ship.ship.angle
+
+  player.ship_speed_x = mod_player_ship.ship.speed_x
+  player.ship_speed_y = mod_player_ship.ship.speed_y
+
+  player.x = player.x + player.ship_speed_x * dt
+  player.y = player.y + player.ship_speed_y * dt
+end
+
+local function update_player(dt)
+  handle_input_player(dt)
+  update_params_player(dt)
+end
 
 -- DRAW --
 local function draw_player()
@@ -78,10 +98,12 @@ local function draw_player()
 end
 
 return {
-  player = player;
   load_player = load_player;
+  handle_input_player = handle_input_player;
   update_player = update_player;
   draw_player = draw_player;
+
+  player = player;
 
   move_up = move_up;
   move_down = move_down;

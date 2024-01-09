@@ -2,32 +2,34 @@
 
 -- LIBS --
 local lib_love = require("love")
-local mod_screen = require("screen")
-local mod_state = require("state")
+local mod_utils_main = require("utils_main")
+
 
 -- VARIABLES --
 local color_menu = {}
 local font_menu = {}
+local background_menu = {}
 local state_menu = "start_menu"
 -- start_menu
+-- create_menu
 -- settings_menu
 
 -- CALLBACKS outside function --
 local function callback_menu_deactivate()
-  mod_state.state_pause = false
+  mod_utils_main.pause_state = false
 end
 
 local function callback_menu_activate()
   state_menu = "start_menu"
-  mod_state.state_pause = true
+  mod_utils_main.pause_state = true
 end
 
 -- LOADS --
 local function load_utils_menu()
-  color_menu.background = {
+  background_menu = {
     image = lib_love.graphics.newImage("assets/images/paused_800x600.png");
-    width_factor = mod_screen.screen_width / 800;
-    height_factor = mod_screen.screen_height / 600;
+    width_factor = mod_utils_main.screen_width / 800;
+    height_factor = mod_utils_main.screen_height / 600;
   }
   color_menu.white = {1, 1, 1}
   color_menu.orange = {1, 0.5, 0}
@@ -39,7 +41,7 @@ end
 
 -- DRAWS --
 local function draw_utils_menu()
-  lib_love.graphics.draw(color_menu.background.image, 0, 0, 0, color_menu.background.width_factor, color_menu.background.height_factor)
+  lib_love.graphics.draw(background_menu.image, 0, 0, 0, background_menu.width_factor, background_menu.height_factor)
   lib_love.graphics.setColor(color_menu.white)
 end
 
@@ -102,6 +104,7 @@ return {
   callback_menu_deactivate = callback_menu_deactivate;
 
   color_menu = color_menu;
+  background_menu = background_menu;
   font_menu = font_menu;
   state_menu = state_menu;
 }
