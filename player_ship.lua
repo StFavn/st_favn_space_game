@@ -40,17 +40,6 @@ local function load_player_ship()
   }
 end
 
--- UPDATES --
-local function update_player_ship(dt)
-  ship.x = ship.x + ship.speed_x * dt
-  ship.y = ship.y + ship.speed_y * dt
-  ship.speed = math.sqrt(ship.speed_x^2 + ship.speed_y^2)
-end
-
-local function update_player_ship_animation(dt)
-  ship.trust_animation:update(dt)
-end
-
 -- MANUAL OPERATIONS --
 local function manual_aseleration(dt)      -- Нажатие клавиши W
   ship.trust = true
@@ -65,6 +54,41 @@ end
 local function manual_turn_right(dt)       -- Нажатие клавиши D
   ship.angle = ship.angle + ship.turn_speed * dt
 end
+
+local function handle_input_ship(dt)
+  if lib_love.keyboard.isDown("w") then
+    manual_aseleration(dt)
+  else
+    ship.trust = false
+  end
+
+  if lib_love.keyboard.isDown("a") then
+    manual_turn_left(dt)
+  end
+
+  if lib_love.keyboard.isDown("d") then
+    manual_turn_right(dt)
+  end
+end
+
+-- UPDATES --
+local function update_params_player_ship(dt)
+  ship.x = ship.x + ship.speed_x * dt
+  ship.y = ship.y + ship.speed_y * dt
+  ship.speed = math.sqrt(ship.speed_x^2 + ship.speed_y^2)
+end
+
+local function update_player_ship_animation(dt)
+  if ship.trust then
+    ship.trust_animation:update(dt)
+  end
+end
+
+local function update_player_ship(dt)
+  update_params_player_ship(dt)
+  update_player_ship_animation(dt)
+end
+
 
 -- DRAWS --
 local function draw_player_ship_state_ship()
@@ -97,7 +121,7 @@ return {
 
   load_player_ship= load_player_ship;
   update_player_ship = update_player_ship;
-  update_player_ship_animation = update_player_ship_animation;
+  handle_input_ship = handle_input_ship;
   draw_player_ship_state_ship = draw_player_ship_state_ship;
   draw_player_ship_state_player = draw_player_ship_state_player;
 

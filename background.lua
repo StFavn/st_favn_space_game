@@ -13,7 +13,7 @@ local map_x_center = map_i_center * background_width
 local map_y_center = map_j_center * background_height
 
 local function draw_bacground()
-  lib_love.graphics.setColor(255, 255, 255)
+  lib_love.graphics.setColor(1, 1, 1)
   lib_love.graphics.setFont(lib_love.graphics.newFont(20))
   for i = 0, map_i_max do
     for j = 0, map_j_max do

@@ -2,7 +2,7 @@
 
 -- LIBS --
 local lib_love = require("love")
-local mod_state = require("state")
+local mod_utils_main = require("utils_main")
 
 -- MODS_MENU --
 local mod_utils = require("/menu/utils_menu")
@@ -12,7 +12,7 @@ local start_menu = {}
 
 -- CALLBACKS --
 local function callback_continue()
-  mod_state.state_pause = false
+  mod_utils_main.pause_state = false
 end
 
 local function callback_create()

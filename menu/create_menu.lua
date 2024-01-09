@@ -3,10 +3,8 @@
 -- LIBS --
 local lib_love = require("love")
 
--- MODS_MENU --
-local mod_utils = require("/menu/utils_menu")
-
 -- MODS --
+local mod_utils = require("/menu/utils_menu")
 local mod_ship_editor = require("/ship_editor/main_editor")
 
 -- VARIABLES --
