@@ -2,7 +2,7 @@
 
 -- LIBS --
 local lib_love = require("love")
-local mod_player_ship = require("player_ship")
+local mod_player_ship = require("src/player_ship")
 
 -- VARIABLES --
 local player = {}

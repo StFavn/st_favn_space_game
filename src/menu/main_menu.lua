@@ -4,10 +4,10 @@
 local lib_love = require("love")
 
 -- MODS_MENU --
-local mod_start_menu = require("/menu/start_menu")
-local mod_create_ship = require("/menu/create_menu")
-local mod_settings_menu = require("/menu/setting_menu")
-local mod_utils = require("/menu/utils_menu")
+local mod_start_menu = require("src/menu/start_menu")
+local mod_create_ship = require("src/menu/create_menu")
+local mod_settings_menu = require("src/menu/setting_menu")
+local mod_utils = require("src/menu/utils_menu")
 
 -- LOADS --
 local function load_main_menu()

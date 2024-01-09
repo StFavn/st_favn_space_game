@@ -5,12 +5,12 @@ local lib_love = require("love")
 local mod_camera = require("libs/camera")
 
 -- MY MODS --
-local mod_utils_main = require("utils_main")
-local mod_player_ship = require("player_ship")
-local mod_player = require("player")
-local mod_view_params = require("view_params")
-local mod_background = require("background")
-local mod_main_menu = require("/menu/main_menu")
+local mod_utils_main = require("src/utils_main")
+local mod_player_ship = require("src/player_ship")
+local mod_player = require("src/player")
+local mod_view_params = require("src/view_params")
+local mod_background = require("src/background")
+local mod_main_menu = require("src/menu/main_menu")
 
 -- VARIABLES --
 local cam = mod_camera()
@@ -94,5 +94,5 @@ function lib_love.draw()
   if mod_utils_main.pause_state then
     mod_main_menu.draw_main_menu()
   end
-  --lib_love.graphics.print("FPS: " .. lib_love.timer.getFPS(), 10, 10)
+  lib_love.graphics.print("FPS: " .. lib_love.timer.getFPS(), 300, 10)
 end

@@ -4,8 +4,8 @@
 local lib_love = require("love")
 
 -- MODS --
-local mod_player_ship = require("player_ship")
-local mod_background = require("background")
+local mod_player_ship = require("src/player_ship")
+local mod_background = require("src/background")
 
 -- VARIABLES --
 local view_coordinates = true

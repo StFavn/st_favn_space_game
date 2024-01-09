@@ -2,7 +2,9 @@
 
 -- LIBS --
 local lib_love = require("love")
-local mod_utils_main = require("utils_main")
+
+-- MODS --
+local mod_utils_main = require("src/utils_main")
 
 
 -- VARIABLES --

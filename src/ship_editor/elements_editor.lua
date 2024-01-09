@@ -4,14 +4,14 @@
 local lib_love = require("love")
 
 local Element = {}
-local Type = {}
+local Class_element = {}
 
 Element.__index = Element
 Element.Type = "Element"
 
-function Element:new(type_element, image)
+function Element:new(Class_element, image)
   self = setmetatable({}, self)
-  self.Type = type_element
+  self.Class_element = Class_element
   self.image = image
   return self
 end

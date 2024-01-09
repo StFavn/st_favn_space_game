@@ -4,8 +4,8 @@
 local lib_love = require("love")
 
 -- MODS --
-local mod_utils = require("/menu/utils_menu")
-local mod_ship_editor = require("/ship_editor/main_editor")
+local mod_utils = require("src/menu/utils_menu")
+local mod_ship_editor = require("src/ship_editor/main_editor")
 
 -- VARIABLES --
 local create_menu = {}

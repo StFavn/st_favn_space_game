@@ -2,10 +2,10 @@
 
 -- LIBS --
 local lib_love = require("love")
-local mod_utils_main = require("utils_main")
 
--- MODS_MENU --
-local mod_utils = require("/menu/utils_menu")
+-- MODS --
+local mod_utils_main = require("src/utils_main")
+local mod_utils = require("src/menu/utils_menu")
 
 -- VARIABLES --
 local start_menu = {}
