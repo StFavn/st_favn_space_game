@@ -7,15 +7,12 @@ local lib_love = require("love")
 local view_coordinates = true
 local view_speed = true
 
--- Не работает с цветом
-local view_color = {
-  r = 102,
-  g = 255,
-  b = 227
+local color = {
+  white_blue = {0.4, 1, 0.8}
 }
 
 local function param_coordinates(ship_x, ship_y)
-  lib_love.graphics.setColor(view_color.r, view_color.g, view_color.b)
+  lib_love.graphics.setColor(color.white_blue)
   lib_love.graphics.setFont(lib_love.graphics.newFont(20))
   local roundedX = math.floor(ship_x)
   local roundedY = math.floor(ship_y)
@@ -24,7 +21,7 @@ local function param_coordinates(ship_x, ship_y)
 end
 
 local function param_speed(ship_speed)
-  lib_love.graphics.setColor(view_color.r, view_color.g, view_color.b)
+  lib_love.graphics.setColor(color.white_blue)
   lib_love.graphics.setFont(lib_love.graphics.newFont(20))
   local roundedSpeed = math.floor(ship_speed)
   lib_love.graphics.print("speed = " .. roundedSpeed, 10, 60)

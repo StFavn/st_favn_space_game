@@ -16,6 +16,8 @@ local mod_main_menu = require("/menu/main_menu")
 
 -- VARIABLES --
 local cam = mod_camera()
+
+-- Эту переменную следует  убрать в файл view_params.lua
 local params = {
   ship_x = nil,
   ship_y = nil,
@@ -31,6 +33,8 @@ function lib_love.load()
 end
 
 -- UPDATES --
+
+-- Эту функцию следует запихать всоответствующий файл, в main.lua ей не место
 local function update_player_ship_view_params()
   params = {
     -- Смещаю центр координат на центр отображаемой карты и превожу координаты корабля в соответствие с этим

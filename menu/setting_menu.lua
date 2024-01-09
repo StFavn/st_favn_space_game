@@ -87,9 +87,9 @@ end
 local function load_settings_menu()
   settings_menu.title =              {text = "Настройки",           x = 100, y = 50,  w = 200, h = 50}
   settings_menu.window_state =       {text = "Оконный режим",       x = 100, y = 150, w = 200, h = 50}
-  settings_menu.resol_800x600 =      {text = "800x600",             x = 400, y = 150, w = 200, h = 25, state = 1, m_state = 0, callback = callback_resol_800x600}
+  settings_menu.resol_800x600 =      {text = "800x600",             x = 400, y = 150, w = 200, h = 25, state = 0, m_state = 0, callback = callback_resol_800x600}
   settings_menu.resol_1024x768 =     {text = "1024x768",            x = 400, y = 175, w = 200, h = 25, state = 0, m_state = 0, callback = callback_resol_1024x768}
-  settings_menu.resol_1280x720 =     {text = "1280x720",            x = 400, y = 200, w = 200, h = 25, state = 0, m_state = 0, callback = callback_resol_1280x720}
+  settings_menu.resol_1280x720 =     {text = "1280x720",            x = 400, y = 200, w = 200, h = 25, state = 1, m_state = 0, callback = callback_resol_1280x720}
   settings_menu.full_screen =        {text = "Полноэкранный режим", x = 100, y = 250, w = 200, h = 50}
   settings_menu.full_screen_on =     {text = "Вкл.",                x = 400, y = 250, w = 200, h = 25, state = 0, m_state = 0, callback = callback_full_screen_on}
   settings_menu.full_screen_off =    {text = "Выкл.",               x = 400, y = 275, w = 200, h = 25, state = 1, m_state = 0, callback = callback_full_screen_off}
