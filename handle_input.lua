@@ -1,4 +1,5 @@
--- handle_input
+-- handle_input.lua
+-- Этот файл нужно раскидать по функциям и удалить
 
 -- LIBS --
 local lib_love = require("love")

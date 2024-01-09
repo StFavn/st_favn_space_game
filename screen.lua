@@ -1,7 +1,7 @@
 local lib_love = require("love")
 
-local screen_width = 800
-local screen_height = 600
+local screen_width = 1280
+local screen_height = 720
 
 local function load_screen()
     lib_love.window.setMode(screen_width, screen_height)

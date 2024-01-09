@@ -1,7 +1,6 @@
 -- player_ship.lua
-package.path = package.path .. ";/usr/local/share/lua/5.4/?.lua;/usr/local/share/lua/5.4/?/init.lua"
 local lib_love = require("love")
-local lib_anim8 = require("anim8")
+local lib_anim8 = require("libs/anim8")
 local mod_background = require("background")
 
 -- SHIP VARIABLES --
