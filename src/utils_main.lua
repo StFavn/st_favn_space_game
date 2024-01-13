@@ -4,16 +4,16 @@
 local lib_love = require("love")
 
 -- STATE VARIABLES --
-local play_state = "manual_ship"
+local state_manual = "manual_ship"
 -- manual_ship
 -- manual_player
 
-local pause_state = false
+local state_pause = false
 -- true
 -- false
 
-local ship_zoom = 0.25
-local player_zoom = 1/ship_zoom
+local zoom_ship = 0.25
+local zoom_player = 1/zoom_ship
 
 -- SCREEN VARIABLES --
 local screen_width = 1280
@@ -25,14 +25,15 @@ local function load_screen()
 end
 
 return {
-  play_state = play_state;
-  pause_state = pause_state;
+  state_manual = state_manual;
+  state_pause = state_pause;
 
-  player_zoom = player_zoom;
-  ship_zoom = ship_zoom;
+  zoom_ship = zoom_ship;
+  zoom_player = zoom_player;
 
   screen_width = screen_width;
   screen_height = screen_height;
+
   load_screen = load_screen;
 }
 

@@ -124,8 +124,5 @@ return {
   handle_input_ship = handle_input_ship;
   draw_player_ship_state_ship = draw_player_ship_state_ship;
   draw_player_ship_state_player = draw_player_ship_state_player;
-
-  manual_aseleration = manual_aseleration;
-  manual_turn_left = manual_turn_left;
-  manual_turn_right = manual_turn_right;
 }
+

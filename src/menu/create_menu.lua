@@ -40,7 +40,9 @@ local function update_create_menu()
   create_menu.save.m_state = mod_utils.check_m_state(create_menu.save)
   create_menu.back.m_state = mod_utils.check_m_state(create_menu.back)
 
+  ---------------------------------------------------------------------------------------------
   mod_ship_editor.update_ship_editor()
+  ---------------------------------------------------------------------------------------------
 end
 
 -- DRAWS --
@@ -54,7 +56,10 @@ end
 
 local function draw_create_menu()
   draw_side_menu()
+
+  ---------------------------------------------------------------------------------------------
   mod_ship_editor.draw_ship_editor()
+  ---------------------------------------------------------------------------------------------
 end
 
 return {

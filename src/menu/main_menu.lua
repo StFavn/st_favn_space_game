@@ -18,7 +18,7 @@ local function load_main_menu()
 end
 
 -- UPDATES --
-local function mousepressed_left_pause()
+local function mousepressed_menu()
   if mod_utils.state_menu == "start_menu" then
     mod_start_menu.check_click_start_menu()
   elseif mod_utils.state_menu == "create_menu" then
@@ -55,7 +55,7 @@ return {
   load_main_menu = load_main_menu;
   update_main_menu = update_main_menu;
   draw_main_menu = draw_main_menu;
-  mousepressed_left_pause = mousepressed_left_pause;
+  mousepressed_menu = mousepressed_menu;
 
   callback_menu_activate = mod_utils.callback_menu_activate;
   callback_menu_deactivate = mod_utils.callback_menu_deactivate;

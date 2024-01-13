@@ -17,8 +17,6 @@ local function load_player()
   player.x = mod_player_ship.ship.manual_zone.center_x
   player.y = mod_player_ship.ship.manual_zone.center_y
 
-  player.ship_speed_x = mod_player_ship.ship.speed_x
-  player.ship_speed_y = mod_player_ship.ship.speed_y
   player.angle = mod_player_ship.ship.angle
 
   player.speed = 10
@@ -75,11 +73,8 @@ end
 local function update_params_player(dt)
   player.angle = mod_player_ship.ship.angle
 
-  player.ship_speed_x = mod_player_ship.ship.speed_x
-  player.ship_speed_y = mod_player_ship.ship.speed_y
-
-  player.x = player.x + player.ship_speed_x * dt
-  player.y = player.y + player.ship_speed_y * dt
+  player.x = player.x + mod_player_ship.ship.speed_x * dt
+  player.y = player.y + mod_player_ship.ship.speed_y * dt
 end
 
 local function update_player(dt)
@@ -104,9 +99,4 @@ return {
   draw_player = draw_player;
 
   player = player;
-
-  move_up = move_up;
-  move_down = move_down;
-  move_left = move_left;
-  move_right = move_right;
 }
